@@ -51,6 +51,7 @@ int printscore;
 int map[26][5] = { 0 };
 int combo = 0;
 int ret_finish = 0;
+char c;
 
 ///////////////////////////////////////  ÇÔ¼ö
 
@@ -83,7 +84,7 @@ void DropNote_fade();
 void DropNote_force();
 void Setting();
 void game_done();
-void result();
+int result();
 
 
 

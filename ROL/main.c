@@ -167,6 +167,9 @@ int DFJK()
 		}
 	}
 }
+
+
+
 int YN()	// 종료 Y or N
 {
 	while (1)
@@ -254,9 +257,6 @@ int LR_Q()	// 왼쪽 오른쪽 움직이고 q로 나가기
 		}
 	}
 }
-
-
-
 
 void startscreen()  // 시작 화면 출력 
 {
@@ -398,11 +398,10 @@ void ranking_screen() {
 void game_done()
 {
 	system("cls");
-	system("pause>null");
 	printf("\n\n\n\n\n\n");
 	printf("                                                        q: 나가기");
 	printf("\n\n\n\n\n\n\n\n");
-	printf("                                                  Your score is ?!? %d", score);
+	printf("                                                  Your score is  %d", score);
 	printf("\n\n\n");
 }
 
@@ -414,7 +413,6 @@ void end_ranking() {
 	insert(printname, score);  // 입력 받아서 데이터 베이스 저장
 	system("cls");
 }
-
 void ranking() {
 	view();
 }
@@ -568,6 +566,7 @@ void Setting(int map[][5], int* combo) {
 			gotoxy(51, 20);
 			printf("Miss         ");
 			*combo = 0;
+			map[26][i] == 0;
 		}
 	}
 
@@ -587,7 +586,8 @@ void spawnnote4(int map[][5]) {
 unsigned _stdcall Render(void* arg) {
 	score = 0;
 
-	while (1) {
+	while (1) 
+	{
 		gameplay(map);
 		Setting(map, &combo);
 
@@ -748,6 +748,11 @@ unsigned _stdcall Render(void* arg) {
 
 
 		Sleep(45);
+
+		if (ret_finish == 1)
+		{
+			_endthread();
+		}
 	}
 }
 
@@ -1840,6 +1845,7 @@ void DropNote_fade() {
 	Sleep(1850);
 
 	ret_finish = 1;
+	system("cls");
 	PlaySound(NULL, 0, 0);
 }
 void DropNote_force()
@@ -1888,7 +1894,7 @@ void DropNote_force()
 	Sleep(1100);
 	spawnnote1(map);
 	Sleep(510);
-	spawnnote1(map);
+	/*spawnnote1(map);
 	Sleep(510);
 	spawnnote1(map);
 	Sleep(1130);
@@ -2341,17 +2347,26 @@ void DropNote_force()
 	Sleep(300);
 	spawnnote1(map);
 	spawnnote2(map);
-	Sleep(1500);
+	Sleep(1500);*/
 	
 
 	
 
+	ret_finish = 1;
 	system("cls");
 	PlaySound(NULL, 0, 0);
-	ret_finish = 1;
 }
 
 
+
+
+int result()
+{
+	system("cls");
+	gotoxy(0, 0);
+	game_done();
+	quit();
+}
 
 
 
@@ -2366,12 +2381,26 @@ int before_game()
 	updown_move();
 	
 
+
 	while (quit_ret != 1)		// 초기값 0 / q누를시 1로 바뀜
 	{
-		hidecursor();
-		if (quit_ret == 2)
+		if (quit_ret == 3)
 		{
 			system("cls");
+			result();
+			if (quit_ret == 1)
+			{
+				quit_ret = 2;
+			}
+		}
+		if (quit_ret == 2)
+		{
+			UD_cursor_ret = 1;
+			LR_cursor_ret = 1;
+			returnvalue = 0;
+			ret_finish = 0;
+			system("cls");
+			gotoxy(0, 0);
 			startscreen();
 			updown_move();
 		}
@@ -2387,28 +2416,20 @@ int before_game()
 			}
 			else if (LR_cursor_ret == 1) {
 				system("cls");
+				ret_finish = 0;
 				playscreen();
 				_beginthreadex(NULL, 0, Render, 0, 0, NULL);
 				DropNote_fade();
-				system("pause>null");
-				quit_ret = 1;
-				end_ranking();
-				system("cls");
-				system("pause");
-				return 0;
+				quit_ret = 3;
 			}
-			else if (LR_cursor_ret == 2) {
+			else if (LR_cursor_ret == 2) {///////////////////////////////////////////////////////////왜안될까 왜안될까
 				system("cls");
+				ret_finish = 0;
 				playscreen();
 				_beginthreadex(NULL, 0, Render, 0, 0, NULL);
 				DropNote_force();
-				system("pause>null");
-				quit_ret = 1;
-				end_ranking();
-				system("cls");
-				system("pause");
-				return 0;
-			}
+				quit_ret = 3;
+			}////////////////////////////////////////////////////////////////////////////////////그러게 왜 안되지
 		}
 		else if (UD_cursor_ret == 2)
 		{		// 나가기 눌렀을 때 2
@@ -2451,11 +2472,3 @@ int before_game()
 	}
 }
 
-
-void result()
-{
-	system("cls");
-	game_done();
-	end_ranking();
-	quit();
-}
