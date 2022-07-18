@@ -170,6 +170,7 @@ int DFJK()
 
 
 
+
 int YN()	// 종료 Y or N
 {
 	while (1)
@@ -257,6 +258,9 @@ int LR_Q()	// 왼쪽 오른쪽 움직이고 q로 나가기
 		}
 	}
 }
+
+
+
 
 void startscreen()  // 시작 화면 출력 
 {
@@ -407,6 +411,7 @@ void game_done()
 
 
 
+
 void end_ranking() {
 	gotoxy(50, 10);
 	scanf("%s", printname);
@@ -416,6 +421,7 @@ void end_ranking() {
 void ranking() {
 	view();
 }
+
 
 
 
@@ -546,14 +552,6 @@ void gameplay(int map[][5])
 
 }
 void Setting(int map[][5], int* combo) {
-	/*for (int i = 23; i >= 0; i--) {
-		for (int j = 0; j < 4; j++) {
-			map[i + 1][j] = map[i][j];
-			if (i == 0) {
-				map[i][j] = 0;
-			}
-		}
-	}*/
 	for (int i = 4; i > 0; i--) {
 		for (int j = 25; j >= 0; j--) {
 			if (i != 25) {
@@ -565,8 +563,8 @@ void Setting(int map[][5], int* combo) {
 		if (map[26][i] == 1) {
 			gotoxy(51, 20);
 			printf("Miss         ");
+			map[26][i] = 0;
 			*combo = 0;
-			map[26][i] == 0;
 		}
 	}
 
@@ -603,7 +601,7 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 50;
 						map[i][1] = 0;
-						break;
+						//break;
 					}
 					else if (i <= 22 && i >= 21) {
 						gotoxy(51, 20);
@@ -611,14 +609,14 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 25;
 						map[i][1] = 0;
-						break;
+						//break;
 					}
 					else {
 						gotoxy(51, 20);
 						printf("BAD!         ");
 						combo = 0;
 						score -= 20;
-						break;
+						//break;
 					}
 				}
 			}
@@ -638,7 +636,7 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 50;
 						map[i][2] = 0;
-						break;
+						//break;
 					}
 					else if (i <= 22 && i >= 21) {
 						gotoxy(51, 20);
@@ -646,14 +644,14 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 25;
 						map[i][2] = 0;
-						break;
+						//break;
 					}
 					else {
 						gotoxy(51, 20);
 						printf("BAD!         ");
 						combo = 0;
 						score -= 20;
-						break;
+						//break;
 					}
 				}
 			}
@@ -673,7 +671,7 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 50;
 						map[i][3] = 0;
-						break;
+						//break;
 					}
 					else if (i <= 22 && i >= 21) {
 						gotoxy(51, 20);
@@ -681,14 +679,14 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 25;
 						map[i][3] = 0;
-						break;
+						//break;
 					}
 					else {
 						gotoxy(51, 20);
 						printf("BAD!         ");
 						combo = 0;
 						score -= 20;
-						break;
+						//break;
 					}
 				}
 			}
@@ -708,7 +706,7 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 50;
 						map[i][4] = 0;
-						break;
+						//break;
 					}
 					else if (i <= 22 && i >= 21) {
 						gotoxy(51, 20);
@@ -716,14 +714,14 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 25;
 						map[i][4] = 0;
-						break;
+						//break;
 					}
 					else {
 						gotoxy(51, 20);
 						printf("BAD!         ");
 						combo = 0;
 						score -= 20;
-						break;
+						//break;
 					}
 				}
 			}
@@ -753,6 +751,7 @@ unsigned _stdcall Render(void* arg) {
 		{
 			_endthread();
 		}
+		
 	}
 }
 
@@ -1877,7 +1876,7 @@ void DropNote_force()
 	Sleep(510);
 	spawnnote1(map);
 	Sleep(1100);
-	spawnnote1(map);
+	/*spawnnote1(map);
 	spawnnote2(map);
 	Sleep(1000);
 	spawnnote1(map);
@@ -1894,7 +1893,7 @@ void DropNote_force()
 	Sleep(1100);
 	spawnnote1(map);
 	Sleep(510);
-	/*spawnnote1(map);
+	spawnnote1(map);
 	Sleep(510);
 	spawnnote1(map);
 	Sleep(1130);
@@ -2387,6 +2386,13 @@ int before_game()
 		if (quit_ret == 3)
 		{
 			system("cls");
+			/*for (int i = 0; i < 5; i++)
+			{
+				for (int j = 0; j < 26; j++)
+				{
+					map[i][j] = 0;
+				}
+			}*/
 			result();
 			if (quit_ret == 1)
 			{
@@ -2399,6 +2405,8 @@ int before_game()
 			LR_cursor_ret = 1;
 			returnvalue = 0;
 			ret_finish = 0;
+			combo = 0;
+			score = 0;
 			system("cls");
 			gotoxy(0, 0);
 			startscreen();
@@ -2460,7 +2468,7 @@ int before_game()
 		}
 		else if (UD_cursor_ret == 4) {
 			system("cls");
-			gotoxy(0, 8);
+			gotoxy(0, 0);
 			view();
 			quit();
 			if (quit_ret == 1)
