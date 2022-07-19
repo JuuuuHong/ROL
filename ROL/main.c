@@ -8,9 +8,7 @@
 
 int main() /////////////////////////////////////////////////////////////////////////////////////////////////////////////////  메인함수
 {
-	//ranking();
 	before_game();
-	//game_done();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  메인함수
 
@@ -265,7 +263,6 @@ int LR_Q()	// 왼쪽 오른쪽 움직이고 q로 나가기
 void startscreen()  // 시작 화면 출력 
 {
 	hidecursor();
-	setcolor(WHITE);
 	printf("\n\n\n\n\n\n\n\n");
 	printf("                                       ######            ###           ##\n");
 	printf("                                       ##   ##          ## ##          ##");
@@ -274,7 +271,6 @@ void startscreen()  // 시작 화면 출력
 	printf("        2.나가기\n");
 	printf("                                       ######          ##   ##         ##");
 	printf("        3.조작법\n");
-	setcolor(WHITE);
 	printf("                                       ## ##           ##   ##         ##");
 	printf("        4.랭킹\n");
 	printf("                                       ##  ##           ## ##          ##\n");
@@ -330,7 +326,7 @@ void selectscreen()
 	printf("                   │                            │                         │                            │\n");
 	printf("                   │      아티스트: Alan walker │                         │       아티스트: Alan walker│\n");
 	printf("                   │                            │                         │                            │\n");
-	printf("                   │      난이도: ★★★☆☆    │                         │       난이도:★★★★★    │\n");
+	printf("                   │      난이도: ★★★★★    │                         │       난이도:★★☆☆☆    │\n");
 	printf("                   │                            │                         │                            │\n");
 	printf("                   │                            │                         │                            │\n");
 	printf("                   └────────────────────────────┘                         └────────────────────────────┘");
@@ -413,7 +409,9 @@ void game_done()
 
 
 void end_ranking() {
-	gotoxy(50, 10);
+	gotoxy(47, 11);
+	printf("이름(이니셜)을 입력하세요");
+	gotoxy(58, 14);
 	scanf("%s", printname);
 	insert(printname, score);  // 입력 받아서 데이터 베이스 저장
 	system("cls");
@@ -583,6 +581,7 @@ void spawnnote4(int map[][5]) {
 }
 unsigned _stdcall Render(void* arg) {
 	score = 0;
+	combo = 0;
 
 	while (1) 
 	{
@@ -601,7 +600,7 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 50;
 						map[i][1] = 0;
-						//break;
+						break;
 					}
 					else if (i <= 22 && i >= 21) {
 						gotoxy(51, 20);
@@ -609,14 +608,14 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 25;
 						map[i][1] = 0;
-						//break;
+						break;
 					}
 					else {
 						gotoxy(51, 20);
 						printf("BAD!         ");
 						combo = 0;
 						score -= 20;
-						//break;
+						break;
 					}
 				}
 			}
@@ -624,7 +623,7 @@ unsigned _stdcall Render(void* arg) {
 			_getch();
 
 		}
-		if (_kbhit() && GetAsyncKeyState(0x44) & 0x8000) {
+		if (_kbhit() && GetAsyncKeyState(0x46) & 0x8000) {
 
 			for (int i = 25; i >= 0; i--)
 			{
@@ -636,7 +635,7 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 50;
 						map[i][2] = 0;
-						//break;
+						break;
 					}
 					else if (i <= 22 && i >= 21) {
 						gotoxy(51, 20);
@@ -644,14 +643,14 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 25;
 						map[i][2] = 0;
-						//break;
+						break;
 					}
 					else {
 						gotoxy(51, 20);
 						printf("BAD!         ");
 						combo = 0;
 						score -= 20;
-						//break;
+						break;
 					}
 				}
 			}
@@ -659,7 +658,7 @@ unsigned _stdcall Render(void* arg) {
 			_getch();
 
 		}
-		if (_kbhit() && GetAsyncKeyState(0x44) & 0x8000) {
+		if (_kbhit() && GetAsyncKeyState(0x4A) & 0x8000) {
 
 			for (int i = 25; i >= 0; i--)
 			{
@@ -671,7 +670,7 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 50;
 						map[i][3] = 0;
-						//break;
+						break;
 					}
 					else if (i <= 22 && i >= 21) {
 						gotoxy(51, 20);
@@ -679,14 +678,14 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 25;
 						map[i][3] = 0;
-						//break;
+						break;
 					}
 					else {
 						gotoxy(51, 20);
 						printf("BAD!         ");
 						combo = 0;
 						score -= 20;
-						//break;
+						break;
 					}
 				}
 			}
@@ -694,7 +693,7 @@ unsigned _stdcall Render(void* arg) {
 			_getch();
 
 		}
-		if (_kbhit() && GetAsyncKeyState(0x44) & 0x8000) {
+		if (_kbhit() && GetAsyncKeyState(0x4B) & 0x8000) {
 
 			for (int i = 25; i >= 0; i--)
 			{
@@ -706,7 +705,7 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 50;
 						map[i][4] = 0;
-						//break;
+						break;
 					}
 					else if (i <= 22 && i >= 21) {
 						gotoxy(51, 20);
@@ -714,20 +713,19 @@ unsigned _stdcall Render(void* arg) {
 						combo++;
 						score += 25;
 						map[i][4] = 0;
-						//break;
+						break;
 					}
 					else {
 						gotoxy(51, 20);
 						printf("BAD!         ");
 						combo = 0;
 						score -= 20;
-						//break;
+						break;
 					}
 				}
 			}
 
 			_getch();
-
 		}
 
 
@@ -759,186 +757,192 @@ unsigned _stdcall Render(void* arg) {
 void DropNote_fade() {
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote2(map);
 	Sleep(330);
 	fade();
-	spawnnote1(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote3(map);		// 1
+	
+	
+	Sleep(625);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);		// 1
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote1(map);
+	Sleep(330);
+	spawnnote3(map);		// 2
+	
+	
+	Sleep(625);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	Sleep(330);
+	spawnnote1(map);
+	Sleep(330);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);		// 3
 	
 	
 	Sleep(625);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);		// 2
+	spawnnote2(map);		// 4
 	
 	
 	Sleep(625);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);		// 3
+	spawnnote4(map);		// 5
 	
 	
 	Sleep(625);
-	spawnnote1(map);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);		// 4
-	
-	
-	Sleep(625);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);		// 5
-	
-	
-	Sleep(625);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);		// 6
 	
 	
 	Sleep(625);
-	spawnnote1(map);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);		// 7
 	
 	
 	Sleep(625);
-	spawnnote1(map);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);		
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);		
-	Sleep(330);
-	spawnnote1(map);		// 8
+	spawnnote2(map);		// 8
 	Sleep(650);
 
 
 	spawnnote1(map);		// 여기서부터 2개씩 하고 1234하는거 1
-	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote3(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(110);
 	spawnnote2(map);
 	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
-	spawnnote4(map);
+	spawnnote1(map);
 
 
 	Sleep(250);				// 그냥 2개씩 하는거
 	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote1(map);
 	spawnnote2(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(610);
 
 
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
@@ -946,18 +950,12 @@ void DropNote_fade() {
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
 	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
 	Sleep(110);
-	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
@@ -965,93 +963,92 @@ void DropNote_fade() {
 
 
 	Sleep(250);				// 그냥 2개씩 하는거
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(610);
 
 
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(110);
-	spawnnote2(map);
-	Sleep(110);
 	spawnnote3(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	Sleep(110);
+	spawnnote1(map);
 	Sleep(110);
 	spawnnote4(map);
+	Sleep(110);
+	spawnnote2(map);
 
 
 	Sleep(250);				// 그냥 2개씩 하는거
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
+	Sleep(330);
 	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(600);
 
 
 	spawnnote1(map);
-	spawnnote2(map);
 	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(650);
 	spawnnote1(map);
 	spawnnote2(map);
-	spawnnote3(map);
 	Sleep(650);
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote4(map);
 	spawnnote3(map);
 	Sleep(470);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(110);
 	spawnnote2(map);
 	Sleep(110);
@@ -1066,107 +1063,107 @@ void DropNote_fade() {
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote4(map);
 	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
 
 
-	spawnnote1(map);		// 여기서부터 2개씩 하고 1234하는거 1
+	spawnnote2(map);		// 여기서부터 2개씩 하고 1234하는거 1
+	Sleep(330);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(110);
 	spawnnote2(map);
 	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
-	spawnnote4(map);
+	spawnnote1(map);
+	Sleep(110);
+	spawnnote1(map);
 
 
 	Sleep(275);
-	spawnnote1(map);
+	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 
 
 	Sleep(550);
-	spawnnote1(map);	// 여기서부터 2개씩 하고 1234하는거 1
+	spawnnote2(map);	// 여기서부터 2개씩 하고 1234하는거 1
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(110);
 	spawnnote2(map);
-	Sleep(110);
+	Sleep(330);
+	spawnnote1(map);
+	Sleep(330);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
 	spawnnote3(map);
 	Sleep(110);
 	spawnnote4(map);
+	Sleep(110);
+	spawnnote2(map);
+	Sleep(110);
+	spawnnote1(map);
 
 
 	Sleep(500);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 
 
 	Sleep(250);
 	spawnnote1(map);
 	Sleep(1300);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(1300);
 	spawnnote1(map);
-	spawnnote2(map);
 	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(1400);
 	spawnnote1(map);
 	spawnnote2(map);
@@ -1180,90 +1177,90 @@ void DropNote_fade() {
 	spawnnote3(map);
 	spawnnote4(map);
 	Sleep(1300);
-	spawnnote1(map);
 	spawnnote2(map);
 	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(1300);
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(1300);
 	spawnnote1(map);
 
 
 	Sleep(1350);
-	spawnnote1(map);	// 여기서부터 2개씩 하고 1234하는거 1
+	spawnnote3(map);	// 여기서부터 2개씩 하고 1234하는거 1
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(110);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
-	spawnnote4(map);
+	spawnnote1(map);
+	Sleep(110);
+	spawnnote2(map);
 
 
 	Sleep(530);
-	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 
 
 	Sleep(550);
-	spawnnote1(map);	// 여기서부터 2개씩 하고 1234하는거 1
+	spawnnote2(map);	// 여기서부터 2개씩 하고 1234하는거 1
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(110);
 	spawnnote2(map);
 	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
-	spawnnote4(map);
+	spawnnote1(map);
 
 
 	Sleep(530);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 
 
 	Sleep(600);
@@ -1272,15 +1269,15 @@ void DropNote_fade() {
 	spawnnote3(map);
 	spawnnote4(map);
 	Sleep(325);
-	spawnnote1(map);
-	Sleep(110);
-	spawnnote2(map);
-	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
 	spawnnote4(map);
 	Sleep(110);
-	spawnnote3(map);
+	spawnnote1(map);
+	Sleep(110);
+	spawnnote2(map);
+	Sleep(110);
+	spawnnote4(map);
 	Sleep(110);
 	spawnnote2(map);
 	Sleep(110);
@@ -1291,84 +1288,136 @@ void DropNote_fade() {
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(110);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
-	spawnnote4(map);
+	spawnnote2(map);
 
 
 	Sleep(240);				// 그냥 2개씩 하는거
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(590);
 
 
-	spawnnote1(map);
 	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(110);
-	spawnnote2(map);
-	Sleep(110);
 	spawnnote3(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(110);
+	spawnnote2(map);
+	Sleep(110);
+	spawnnote1(map);
 	Sleep(110);
 	spawnnote4(map);
 
 
 	Sleep(250);				// 그냥 2개씩 하는거
+	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote4(map);
+	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote2(map);
+	Sleep(600);
+
+	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(110);
+	spawnnote1(map);
+	Sleep(110);
+	spawnnote4(map);
+	Sleep(110);
+	spawnnote2(map);
+
+	Sleep(250);				// 그냥 2개씩 하는거
+	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
@@ -1376,471 +1425,419 @@ void DropNote_fade() {
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
 	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(600);
 
 	spawnnote1(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
 	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
 	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
 	Sleep(110);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
-	spawnnote4(map);
+	spawnnote1(map);
 
 	Sleep(250);				// 그냥 2개씩 하는거
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
 	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(600);
-
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(110);
-	spawnnote2(map);
-	Sleep(110);
 	spawnnote3(map);
-	Sleep(110);
+	Sleep(330);
+	spawnnote3(map);
 	spawnnote4(map);
-
-	Sleep(250);				// 그냥 2개씩 하는거
-	spawnnote1(map);
-	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
 	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(600);
 
 
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(110);
-	spawnnote2(map);
+	spawnnote1(map);
 	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
-	spawnnote4(map);
+	spawnnote2(map);
 
 
 	Sleep(250);				// 그냥 2개씩 하는거
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
+	Sleep(330);
 	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(600);
 
 
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(110);
 	spawnnote2(map);
 	Sleep(110);
 	spawnnote3(map);
+	Sleep(110);
+	spawnnote1(map);
 	Sleep(110);
 	spawnnote4(map);
 
 
 	Sleep(250);				// 그냥 2개씩 하는거
 	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
+	Sleep(330);
 	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(600);
 
 
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(110);
-	spawnnote2(map);
+	spawnnote1(map);
 	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
-	spawnnote4(map);
+	spawnnote2(map);
 
 
 	Sleep(250);				// 그냥 2개씩 하는거
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
+	spawnnote4(map);
+	Sleep(330);
 	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
 	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote3(map);
 	Sleep(600);
 
 
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(110);
-	spawnnote2(map);
-	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
+	spawnnote1(map);
+	Sleep(110);
 	spawnnote4(map);
+	Sleep(110);
+	spawnnote2(map);
 
 
 	Sleep(250);				// 그냥 2개씩 하는거
-	spawnnote1(map);
 	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
 	spawnnote2(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
-	Sleep(330);
-	spawnnote1(map);
-	spawnnote2(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(600);
 
 
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(110);
 	spawnnote2(map);
 	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
+	spawnnote1(map);
+
+
+	Sleep(250);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote1(map);
+	Sleep(330);
 	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	Sleep(330);
+	spawnnote4(map);
+	Sleep(600);
+
+
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote1(map);
+	Sleep(330);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote2(map);
+	Sleep(110);
+	spawnnote3(map);
+	Sleep(110);
+	spawnnote4(map);
+	Sleep(110);
+	spawnnote1(map);
 
 
 	Sleep(250);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote3(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
+	spawnnote2(map);
 	Sleep(600);
 
 
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(110);
 	spawnnote2(map);
+	Sleep(330);
+	spawnnote4(map);
+	Sleep(330);
+	spawnnote1(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
+	Sleep(330);
+	spawnnote4(map);
+	Sleep(110);
+	spawnnote1(map);
 	Sleep(110);
 	spawnnote3(map);
 	Sleep(110);
-	spawnnote4(map);
+	spawnnote2(map);
 
 
 	Sleep(250);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote2(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(600);
 
 
-	spawnnote1(map);
+	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote4(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(110);
 	spawnnote2(map);
 	Sleep(110);
-	spawnnote3(map);
+	spawnnote1(map);
 	Sleep(110);
 	spawnnote4(map);
+	Sleep(110);
+	spawnnote3(map);
 
 
 	Sleep(250);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(600);
-
-
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
-	Sleep(110);
-	spawnnote2(map);
-	Sleep(110);
-	spawnnote3(map);
-	Sleep(110);
 	spawnnote4(map);
-
-
-	Sleep(250);
-	spawnnote1(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
+	Sleep(330);
+	spawnnote2(map);
 	Sleep(330);
 	spawnnote1(map);
 	Sleep(330);
-	spawnnote1(map);
+	spawnnote4(map);
 	Sleep(330);
-	spawnnote1(map);
-	Sleep(330);
-	spawnnote1(map);
+	spawnnote3(map);
 	Sleep(1850);
 
 	ret_finish = 1;
@@ -1876,7 +1873,7 @@ void DropNote_force()
 	Sleep(510);
 	spawnnote1(map);
 	Sleep(1100);
-	/*spawnnote1(map);
+	spawnnote1(map);
 	spawnnote2(map);
 	Sleep(1000);
 	spawnnote1(map);
@@ -2346,7 +2343,7 @@ void DropNote_force()
 	Sleep(300);
 	spawnnote1(map);
 	spawnnote2(map);
-	Sleep(1500);*/
+	Sleep(1500);
 	
 
 	
@@ -2386,13 +2383,7 @@ int before_game()
 		if (quit_ret == 3)
 		{
 			system("cls");
-			/*for (int i = 0; i < 5; i++)
-			{
-				for (int j = 0; j < 26; j++)
-				{
-					map[i][j] = 0;
-				}
-			}*/
+			end_ranking();
 			result();
 			if (quit_ret == 1)
 			{
@@ -2405,8 +2396,6 @@ int before_game()
 			LR_cursor_ret = 1;
 			returnvalue = 0;
 			ret_finish = 0;
-			combo = 0;
-			score = 0;
 			system("cls");
 			gotoxy(0, 0);
 			startscreen();
@@ -2430,14 +2419,14 @@ int before_game()
 				DropNote_fade();
 				quit_ret = 3;
 			}
-			else if (LR_cursor_ret == 2) {///////////////////////////////////////////////////////////왜안될까 왜안될까
+			else if (LR_cursor_ret == 2) {
 				system("cls");
 				ret_finish = 0;
 				playscreen();
 				_beginthreadex(NULL, 0, Render, 0, 0, NULL);
 				DropNote_force();
 				quit_ret = 3;
-			}////////////////////////////////////////////////////////////////////////////////////그러게 왜 안되지
+			}
 		}
 		else if (UD_cursor_ret == 2)
 		{		// 나가기 눌렀을 때 2

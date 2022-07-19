@@ -9,7 +9,7 @@ char* user = "root"; //MySQL 로그인 아이디, Default value = root
 char* password = "158pk158."; //MySQL 로그인 할 때 쓰이는 password 값
 char* database = "rankdb"; //Database 이름을 저장
 
-void insert(char name[15], int score){
+void insert(char name[15], int point){
 	char query[255]; //SQL Query 저장 변수
 
 	conn = mysql_init(NULL); //conn 변수 초기화
@@ -18,7 +18,7 @@ void insert(char name[15], int score){
 		exit(1);
 	}
 
-	sprintf(query, "insert into ranking values('%s',%d);", name, score); //query 변수에 insert SQL문 저장
+	sprintf(query, "insert into ranking values('%s',%d);", name, point); //query 변수에 insert SQL문 저장
 	mysql_query(conn, query); //query 날리기
 
 	mysql_close(conn); //연결 해제
@@ -33,7 +33,7 @@ void view() {
 		exit(1);
 	}
 
-	sprintf(query, "SELECT *, rank() over(order by score desc) AS ranking from ranking;"); //info 테이블에 있는 데이터를 모두 가져오는 query 작성
+	sprintf(query, "SELECT name, point, rank() over (order by point desc) as ranking from ranking;"); //info 테이블에 있는 데이터를 모두 가져오는 query 작성
 	mysql_query(conn, query);
 
 	res = mysql_store_result(conn); //query 결과값 res 변수에 저장하기
